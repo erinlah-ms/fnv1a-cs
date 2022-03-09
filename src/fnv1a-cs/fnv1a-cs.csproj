@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.0;netstandard1.1;netstandard2.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <!--
+    Nuget Package metadata
+    Reference: https://docs.microsoft.com/en-us/nuget/create-packages/package-authoring-best-practices
+  -->
+  <PropertyGroup>
+    <Version Condition="'$(Version)' == ''">0.0.0-preview</Version>
+    <Authors>Erin Lahman</Authors>
+    <Description>Provides implementation of Fnv1a hash algorithm</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,7 @@
+<Project>
+  <Sdk Name="DotNet.ReproducibleBuilds.Isolated" Version="1.1.1" />
+  <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
+    <Version Condition="'$(Version)' == ''">0.0.0-preview</Version>
+  </PropertyGroup>
+</Project>
