@@ -4,4 +4,13 @@
     <LangVersion>10.0</LangVersion>
     <Version Condition="'$(Version)' == ''">0.0.0-preview</Version>
   </PropertyGroup>
+
+  <!--
+    Compiler security mitigations
+    Note, CheckForOverflowUnderflow is encouraged on Debug builds, but never required.
+  -->
+  <PropertyGroup>
+    <HighEntropyVA>true</HighEntropyVA>
+    <CheckForOverflowUnderflow Condition="'$(Configuration)' == 'Debug'">true</CheckForOverflowUnderflow>
+  </PropertyGroup>
 </Project>
