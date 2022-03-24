@@ -1,9 +1,8 @@
 using Elms.Utils;
+using Elms.Utils.ValueExtensions;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Text;
 
 namespace test_fnv1a;
 
@@ -11,58 +10,84 @@ namespace test_fnv1a;
 public partial class TestFnv1a
 {
   [TestMethod]
+  public void SyntaxRefSyntaxExample()
+  {
+    // arrange
+
+    // act
+    var result = Fnv1a.Create().Hash((byte)0);
+
+    // assert
+    result.Should().Be(unchecked((int)0x811c9dc5));
+  }
+
+  [TestMethod]
   public void TestEmpty()
   {
     // arrange
-    var h = Fnv1a.Create();
 
     // act
+    var result = Fnv1a.Create().GetHashCode();
 
     // assert
-    h.GetHashCode().Should().Be(unchecked((int)0x811c9dc5));
+    result.Should().Be(unchecked((int)0x811c9dc5));
   }
 
   [DataTestMethod]
   [DynamicData(nameof(TestVectors), DynamicDataSourceType.Method)]
-  public void TestAsciiVectors(byte[] input, uint expectedHash)
+  public void TestAsciiVectors(string input, uint expectedHash)
   {
     // arrange
-    var h = Fnv1a.Create();
 
     // act
-    h.Hash(input);
+    var result = Fnv1a.Create().HashUtf8(input).GetHashCode();
 
     // assert
-    h.GetHashCode().Should().Be(unchecked((int)expectedHash));
+    result.Should().Be(unchecked((int)expectedHash));
   }
+
+  /// <summary>
+  /// 
+  /// </summary>
+  [DataTestMethod]
+  [DynamicData(nameof(Utf8CornerCases), DynamicDataSourceType.Method)]
+  public void TestUtf8InternalEncoding(string input)
+  {
+    // arrange
+
+    // act
+    var expectedBytes = Encoding.UTF8.GetBytes(input);
+    var expected = Fnv1a.Create().Hash(expectedBytes).GetHashCode();
+    var actual = Fnv1a.Create().HashUtf8(input).GetHashCode();
+
+    // assert
+    actual.Should().Be(expected);
+  }
+
 
   [TestMethod]
   public void TestPrimitivesCoverage()
   {
     // TODO: why can't method chain on temporaries with ref returns?
-    Fnv1a tmp;
 
     // byte 'a'
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((byte)0x61u)).GetHashCode().Should().Be(unchecked((int)0xe40c292cu));
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((sbyte)0x61u)).GetHashCode().Should().Be(unchecked((int)0xe40c292cu));
+    Fnv1a.Create().Hash(unchecked((byte)0x61u)).GetHashCode().Should().Be(unchecked((int)0xe40c292cu));
+    Fnv1a.Create().Hash(unchecked((sbyte)0x61u)).GetHashCode().Should().Be(unchecked((int)0xe40c292cu));
 
     // short 'fo'
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((ushort)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((short)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((char)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
+    Fnv1a.Create().Hash(unchecked((ushort)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
+    Fnv1a.Create().Hash(unchecked((short)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
+    Fnv1a.Create().Hash(unchecked((char)0x666fu)).GetHashCode().Should().Be(unchecked((int)0x6222e842u));
 
     // int 'foob'
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((uint)0x666f6f62u)).GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((int)0x666f6f62u)).GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
+    Fnv1a.Create().Hash(unchecked((uint)0x666f6f62u)).GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
+    Fnv1a.Create().Hash(unchecked((int)0x666f6f62u)).GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
 
     // long 'chongo w'
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((ulong)0x63686f6e676f2077ul)).GetHashCode().Should().Be(unchecked((int)0xdd77ed30u));
-    tmp = Fnv1a.Create(); tmp.Hash(unchecked((long)0x63686f6e676f2077ul)).GetHashCode().Should().Be(unchecked((int)0xdd77ed30u));
+    Fnv1a.Create().Hash(unchecked((ulong)0x63686f6e676f2077ul)).GetHashCode().Should().Be(unchecked((int)0xdd77ed30u));
+    Fnv1a.Create().Hash(unchecked((long)0x63686f6e676f2077ul)).GetHashCode().Should().Be(unchecked((int)0xdd77ed30u));
 
     // utf16be b'foob' == "\u666f\u6f62"
-    tmp = Fnv1a.Create(); tmp.Hash("\u666f\u6f62").GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
-
-    // Hand crafted utf16be test case. Not part of original test vectors
-    tmp = Fnv1a.Create(); tmp.Hash("hello").GetHashCode().Should().Be(unchecked((int)0x1507ef4fu));
+    Fnv1a.Create().HashUtf16("\u666f\u6f62").GetHashCode().Should().Be(unchecked((int)0x3f5076efu));
   }
 }
