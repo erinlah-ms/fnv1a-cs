@@ -1,9 +1,9 @@
-﻿using Elms.Utils;
+﻿using Erlams.Utils;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace test_fnv1a
 {
-  using Elms.Utils.RefExtensions;
+  using Erlams.Utils.RefExtensions;
   using FluentAssertions;
 
   [TestClass]

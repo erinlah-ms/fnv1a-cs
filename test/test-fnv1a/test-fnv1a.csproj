@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\fnv1a-cs\fnv1a-cs.csproj" />
+    <ProjectReference Include="..\..\src\fnv1a-cs\Erlams.Fnv1a.csproj" />
   </ItemGroup>
 
 </Project>

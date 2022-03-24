@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "fnv1a-cs", "..\src\fnv1a-cs\fnv1a-cs.csproj", "{C727DA0A-FF9C-4D5B-BEBA-59AD199C5E6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Erlams.Fnv1a", "..\src\fnv1a-cs\Erlams.Fnv1a.csproj", "{C727DA0A-FF9C-4D5B-BEBA-59AD199C5E6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "test-fnv1a", "..\test\test-fnv1a\test-fnv1a.csproj", "{3616FC2C-FA68-465F-8CF4-61A67E675A12}"
 EndProject

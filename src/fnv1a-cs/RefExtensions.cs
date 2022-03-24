@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Elms.Utils.RefExtensions
+namespace Erlams.Utils.RefExtensions
 {
   /// <remarks>
   /// Struct instance methods aren't allowed ref returns (error CS8170), but static methods can.

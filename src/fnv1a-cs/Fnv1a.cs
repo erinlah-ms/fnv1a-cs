@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Elms.Utils
+namespace Erlams.Utils
 {
   /// <summary>
   /// Implementation of Fnv1a 32bit hash algorithm

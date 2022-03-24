@@ -1,6 +1,6 @@
-﻿using Elms.Utils.RefExtensions;
+﻿using Erlams.Utils.RefExtensions;
 
-namespace Elms.Utils.ValueExtensions
+namespace Erlams.Utils.ValueExtensions
 {
   /// <summary>
   /// Value overloads of the <see cref="RefExtensions.RefExtensions"/> class.
